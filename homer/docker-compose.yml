@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  app:
+    image: b4bz/homer
+    container_name: homer
+    restart: unless-stopped
+    ports:
+      - 8080:8080
+    user: 1000:1000
+    volumes:
+      - ./assets:/www/assets    
+    environment:
+      - INIT_ASSETS=1 # default
+      - IPV6_DISABLE=1

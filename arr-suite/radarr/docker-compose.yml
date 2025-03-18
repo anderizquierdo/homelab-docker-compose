@@ -1,0 +1,24 @@
+services:
+  radarr:
+    image: ghcr.io/hotio/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=2000
+      - UMASK=002
+      - TZ=Europe/Madrid
+    volumes:
+      - ./config:/config
+      - /mnt/p2p:/data
+    restart: unless-stopped
+    # ports:
+    #   - "7878:7878"
+    networks:
+      - arr-suite
+      - p2p
+
+networks:
+  arr-suite:
+    external: true
+  p2p:
+    external: true

@@ -1,0 +1,24 @@
+services:
+  readarr:
+    image: ghcr.io/hotio/readarr
+    container_name: readarr
+    environment:
+      - PUID=1000
+      - PGID=2000
+      - UMASK=002
+      - TZ=Europe/Madrid
+    volumes:
+      - ./config:/config
+      - /mnt/p2p:/data
+    restart: unless-stopped
+    # ports:
+    #   - 8787:8787
+    networks:
+      - arr-suite
+      - p2p
+
+networks:
+  arr-suite:
+    external: true
+  p2p:
+    external: true

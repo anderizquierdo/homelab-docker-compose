@@ -1,0 +1,35 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    environment:
+      DOMAIN: ${BASE_URL} # https://yourdomain.com
+      SIGNUPS_ALLOWED: "true" # Deactivate this with "false" after you have created your account so that no strangers can register
+    volumes:
+      - vaultwarden:/data
+    networks:
+      - vaultwarden
+
+  vaultwarden-backup:
+    image: bruceforce/vaultwarden-backup
+    container_name: vaultwarden-backup
+    restart: unless-stopped
+    init: true
+    depends_on:
+      - vaultwarden
+    volumes:
+      - vaultwarden:/data
+      - backup:/backup
+    environment:
+      CRON_TIME: "0 * * * *" # run backup every hour
+      BACKUP_USE_DEDUPE: true
+      TZ: "Europe/Madrid"
+
+volumes:
+  vaultwarden:
+  backup:
+
+networks:
+  vaultwarden:
+    external: true

@@ -1,0 +1,20 @@
+services:
+  prowlarr:
+    image: ghcr.io/hotio/prowlarr
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Madrid
+    volumes:
+      - ./config:/config
+    restart: unless-stopped
+    # ports:
+    #   - "9696:9696"
+    networks:
+      - arr-suite
+
+networks:
+  arr-suite:
+    external: true

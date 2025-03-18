@@ -1,0 +1,17 @@
+services:
+  jellyseerr:
+    image: fallenbagel/jellyseerr
+    container_name: jellyseerr
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - ./config:/app/config
+    restart: unless-stopped
+    # ports:
+    #   - 5055:5055
+    networks:
+      - arr-suite
+
+networks:
+  arr-suite:
+    external: true
