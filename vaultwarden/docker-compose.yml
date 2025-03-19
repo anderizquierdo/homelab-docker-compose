@@ -25,6 +25,7 @@ services:
       CRON_TIME: "0 * * * *" # run backup every hour
       BACKUP_USE_DEDUPE: true
       TZ: "Europe/Madrid"
+    network_mode: none
 
 volumes:
   vaultwarden:
