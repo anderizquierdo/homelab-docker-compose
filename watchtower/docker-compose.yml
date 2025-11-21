@@ -1,7 +1,7 @@
 services:
   watchtower:
     container_name: watchtower
-    image: containrrr/watchtower
+    image: nickfedor/watchtower
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     command: --cleanup --schedule "0 0 4 * * *" # run every night at 4am
