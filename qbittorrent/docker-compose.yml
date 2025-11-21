@@ -9,7 +9,7 @@ services:
       - TZ=Europe/Madrid
       - WEBUI_PORT=8080
       - TORRENTING_PORT=6881
-      - DOCKER_MODS=ghcr.io/gabe565/linuxserver-mod-vuetorrent
+      - DOCKER_MODS=ghcr.io/vuetorrent/vuetorrent-lsio-mod:latest
     volumes:
       - ./config:/config
       - /mnt/p2p/torrent:/downloads
