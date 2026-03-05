@@ -1,14 +1,15 @@
 services:
-  jellyseerr:
-    image: fallenbagel/jellyseerr
-    container_name: jellyseerr
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: seerr
     environment:
       - TZ=Europe/Madrid
     volumes:
       - ./config:/app/config
     restart: unless-stopped
-    # ports:
-    #   - 5055:5055
+    expose:
+      - 5055
     networks:
       - arr-suite
 
