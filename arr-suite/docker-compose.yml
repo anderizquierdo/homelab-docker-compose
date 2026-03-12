@@ -1,0 +1,73 @@
+services:
+
+  sonarr:
+    image: ghcr.io/hotio/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=2000
+      - UMASK=002
+      - TZ=Europe/Madrid
+    volumes:
+      - ./sonarr:/config
+      - /mnt/p2p:/data
+    restart: unless-stopped
+    expose:
+      - 8989
+    networks:
+      - arr-suite
+      - p2p
+
+  radarr:
+    image: ghcr.io/hotio/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=2000
+      - UMASK=002
+      - TZ=Europe/Madrid
+    volumes:
+      - ./radarr:/config
+      - /mnt/p2p:/data
+    restart: unless-stopped
+    expose:
+      - 7878
+    networks:
+      - arr-suite
+      - p2p
+
+  prowlarr:
+    image: ghcr.io/hotio/prowlarr
+    container_name: prowlarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - UMASK=002
+      - TZ=Europe/Madrid
+    volumes:
+      - ./prowlarr:/config
+    restart: unless-stopped
+    expose:
+      - 9696
+    networks:
+      - arr-suite
+  
+  seerr:
+    image: ghcr.io/seerr-team/seerr:latest
+    init: true
+    container_name: seerr
+    environment:
+      - TZ=Europe/Madrid
+    volumes:
+      - ./seerr:/app/config
+    restart: unless-stopped
+    expose:
+      - 5055
+    networks:
+      - arr-suite
+
+networks:
+  arr-suite:
+    external: true
+  p2p:
+    external: true
