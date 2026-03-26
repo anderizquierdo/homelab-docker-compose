@@ -31,7 +31,7 @@ wg-easy is a **WireGuard VPN server** with a built-in web UI for managing client
 | `PORT` | `51821` | Web UI port |
 | `WG_PORT` | `51820` | WireGuard UDP port |
 | `WG_DEFAULT_ADDRESS` | `10.8.0.x` | VPN subnet — clients receive addresses in this range |
-| `WG_DEFAULT_DNS` | `192.168.0.50` | DNS server pushed to clients — set to your AdGuard Home or Pi-hole IP |
+| `WG_DEFAULT_DNS` | *(your local DNS IP)* | DNS server pushed to clients — set to your AdGuard Home or Pi-hole IP |
 | `WG_ALLOWED_IPS` | `0.0.0.0/0` | Routes all client traffic through the VPN (full-tunnel mode) |
 | `WG_PERSISTENT_KEEPALIVE` | `25` | Keepalive interval in seconds — keeps the tunnel alive through NAT |
 | `UI_TRAFFIC_STATS` | `true` | Shows per-peer traffic usage in the web UI |
@@ -64,5 +64,5 @@ wg-easy requires elevated privileges to manage the WireGuard network interface:
 ## Notes
 
 - `WG_ALLOWED_IPS=0.0.0.0/0` routes **all** client traffic through the VPN. To use split-tunnel mode (only route traffic to home network), change this to your LAN subnet (e.g. `192.168.0.0/24`).
-- `WG_DEFAULT_DNS=192.168.0.50` — update this to match your local DNS server (AdGuard Home, Pi-hole, or router IP) so VPN clients benefit from local DNS filtering.
+- `WG_DEFAULT_DNS` — update this to match your local DNS server (AdGuard Home, Pi-hole, or router IP) so VPN clients benefit from local DNS filtering.
 - The web UI (port `51821`) should be restricted to local network access only.
